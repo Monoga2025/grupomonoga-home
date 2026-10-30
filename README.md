@@ -10,6 +10,7 @@ Marketing site for a small software studio that builds admin panels, custom web 
 - `casos-de-exito.html`: case studies.
 - `contacto.html`: contact page with a WhatsApp link and a form-style CTA.
 - `guia-ventas-monoga.html`: sales guide page.
+- `cotizacion/`: sample quote page template (placeholders only, see [`cotizacion/README.md`](cotizacion/README.md)); ported from `cotizacion-william`.
 
 Each page also exists as `<name>/index.html` so clean URLs work on static hosts.
 

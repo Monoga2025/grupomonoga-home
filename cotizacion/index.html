@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido a tu nuevo negocio 2026 | Propuesta Comercial</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Wompi Checkout Widget -->
+  <script type="text/javascript" src="https://checkout.wompi.co/widget.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              200: '#bae0fd',
+              500: '#0072f5',
+              600: '#0058ca',
+              700: '#0047a5',
+              800: '#033b85',
+              900: '#06326e',
+              950: '#031c42',
+            }
+          },
+          animation: {
+            'shimmer': 'shimmer 2.5s linear infinite',
+            'marquee': 'marquee 28s linear infinite',
+          },
+          keyframes: {
+            shimmer: {
+              from: { backgroundPosition: '0 0' },
+              to: { backgroundPosition: '-200% 0' }
+            },
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #0c121e;
+      color: #090e17;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Lighting Orbs (Edge Gaussian Blur) */
+    .ambient-glow-top {
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(0, 114, 245, 0.08) 0%, transparent 70%);
+      filter: blur(140px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ambient-glow-center {
+      position: absolute;
+      top: 50%;
+      left: -180px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(5, 150, 105, 0.06) 0%, transparent 70%);
+      filter: blur(140px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Shimmer Badge */
+    .shimmer-badge {
+      background: linear-gradient(90deg, rgba(0,114,245,0.15) 0%, rgba(0,114,245,0.35) 50%, rgba(0,114,245,0.15) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 3s infinite;
+    }
+
+    /* Tactile Press (Emil Kowalski) */
+    .tactile-btn {
+      transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 140ms cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .tactile-btn:hover {
+      transform: translateY(-2px);
+    }
+    .tactile-btn:active {
+      transform: scale(0.975) translateY(1px);
+    }
+
+    /* Glass Card */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.05);
+    }
+    .glass-card:hover {
+      border-color: rgba(0, 114, 245, 0.35);
+      box-shadow: 0 20px 35px -12px rgba(0, 114, 245, 0.09);
+    }
+
+    /* 3D Credit Card Component (21st.dev / Aceternity standard) */
+    .card-scene {
+      perspective: 1000px;
+    }
+    .credit-card-3d {
+      width: 100%;
+      max-width: 380px;
+      height: 220px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      border-radius: 18px;
+      margin: 0 auto;
+    }
+    .credit-card-3d.is-flipped {
+      transform: rotateY(180deg);
+    }
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 18px;
+      box-shadow: 0 20px 40px -15px rgba(2, 28, 66, 0.4);
+      overflow: hidden;
+    }
+    .card-front {
+      background: linear-gradient(135deg, #091a36 0%, #0f3460 50%, #1e3a8a 100%);
+      color: #ffffff;
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .card-back {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      transform: rotateY(180deg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px 0;
+    }
+    .chip-gold {
+      background: linear-gradient(135deg, #e5a93b 0%, #fef08a 50%, #d97706 100%);
+      border-radius: 6px;
+      width: 44px;
+      height: 32px;
+      position: relative;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.25);
+    }
+    .chip-line {
+      position: absolute;
+      border: 0.5px solid rgba(0,0,0,0.25);
+    }
+    .card-shine {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.0) 55%);
+      pointer-events: none;
+    }
+
+    /* SCROLL EXPAND MEDIA STYLING */
+    .hero-sticky-container {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body class="relative antialiased selection:bg-brand-500 selection:text-white bg-slate-950">
+
+  <!-- Top Urgency Banner (Shrine CRO) -->
+  <div class="fixed top-0 left-0 right-0 z-50 bg-slate-900/90 backdrop-blur-md text-slate-100 py-2.5 px-4 text-xs font-semibold border-b border-slate-800 shadow-sm">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="flex h-2 w-2 relative">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        <span class="text-emerald-400 font-bold tracking-wide uppercase text-[11px]">Cupo Aliado Fundador:</span>
+        <span class="hidden sm:inline text-slate-300">Tarifa preferencial reservada para Sample Telecom Co. (1 de 2 cupos nacionales).</span>
+      </div>
+      <div class="flex items-center gap-2 font-mono text-slate-300">
+        <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-400"></i>
+        <span>Expira en:</span>
+        <span id="countdown-timer" class="text-amber-400 font-bold">23h 48m 15s</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN SCROLL EXPANSION HERO SECTION (21st.dev Component with Soft Natural Desk & Universal Dashboard) -->
+  <div id="scroll-hero-wrapper" class="relative w-full" style="height: 240vh;">
+    
+    <div class="hero-sticky-container flex items-center justify-center">
+      
+      <!-- Background Image (Soft Desk, Papers, Morning Light) with opacity fade -->
+      <div id="hero-bg-layer" class="absolute inset-0 z-0 h-full w-full transition-opacity duration-100">
+        <img 
+          src="../assets/bg_desk_papers.jpg" 
+          alt="Planificación y Espacio de Trabajo Ejecutivo" 
+          class="w-full h-full object-cover object-center"
+        />
+        <div class="absolute inset-0 bg-slate-950/45 backdrop-blur-[1px]"></div>
+      </div>
+
+      <!-- Navigation Overlay -->
+      <header class="absolute top-12 left-0 right-0 z-40 max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-slate-900/90 border border-white/20 flex items-center justify-center text-white shadow-lg backdrop-blur-md">
+            <i data-lucide="layers" class="w-5 h-5 text-amber-300"></i>
+          </div>
+          <div>
+            <h1 class="text-base font-black tracking-tight text-white drop-shadow">SAMPLE TELECOM CO.</h1>
+            <p class="text-[10px] font-bold text-amber-300 uppercase tracking-widest drop-shadow">Plataforma &bull; Panel de Gestión &bull; IA</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="#pasarela-pago" class="tactile-btn px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold shadow-lg shadow-brand-600/30 flex items-center gap-2">
+            <span>Ir al Pago</span>
+            <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </header>
+
+      <!-- Center Expanding Media Container (Clean Universal Admin Dashboard) -->
+      <div 
+        id="hero-media-box"
+        class="absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-3xl overflow-hidden border-2 border-white/40 shadow-2xl shadow-slate-950/70 transition-none"
+        style="width: 340px; height: 440px; max-width: 95vw; max-height: 85vh;"
+      >
+        <img 
+          src="../assets/media_dashboard.jpg" 
+          alt="Panel Administrativo Central y Métricas en Tiempo Real" 
+          class="w-full h-full object-cover rounded-2xl"
+        />
+        
+        <!-- Gradient Overlay on Media -->
+        <div id="hero-media-overlay" class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/20 rounded-2xl"></div>
+
+        <!-- Inside Media Badge Info -->
+        <div class="absolute bottom-6 left-6 right-6 z-20 text-center">
+          <p id="hero-subdate" class="text-xs sm:text-sm font-black uppercase tracking-widest text-amber-300 drop-shadow">
+            PANEL ADMINISTRATIVO CENTRAL
+          </p>
+          <p id="hero-subexpand" class="text-white/95 text-xs font-semibold tracking-wide mt-1 flex items-center justify-center gap-1.5 drop-shadow">
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-amber-300 animate-bounce"></i>
+            <span>Desliza para expandir la plataforma</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Split Headline (Translates Left & Right on scroll) -->
+      <div class="absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-center pointer-events-none w-full px-4">
+        <h2 id="hero-title-first" class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white drop-shadow-2xl tracking-tight uppercase">
+          Bienvenido
+        </h2>
+        <h2 id="hero-title-rest" class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-amber-200 drop-shadow-2xl tracking-tight uppercase mt-1">
+          a tu nuevo negocio 2026
+        </h2>
+      </div>
+
+      <!-- Floating Scroll Indicator -->
+      <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-30 text-center text-slate-300 text-xs font-semibold flex items-center gap-2 bg-slate-900/85 px-4 py-2 rounded-full border border-slate-700 backdrop-blur-md shadow-md">
+        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+        <span>Haz Scroll para ver la Propuesta Completa</span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MAIN CONTENT CONTAINER (Reveals seamlessly after expansion on Pure White Luxury Canvas) -->
+  <main class="relative z-30 bg-white text-slate-900 rounded-t-[40px] shadow-2xl border-t border-slate-200 -mt-12 pt-16">
+    
+    <div class="ambient-glow-top"></div>
+    <div class="ambient-glow-center"></div>
+
+    <!-- Hero Intro Summary inside White Canvas -->
+    <div class="max-w-6xl mx-auto px-6 mb-16 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-200 bg-brand-50/70 shimmer-badge text-brand-700 text-xs font-bold mb-4">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-600"></i>
+        <span>Propuesta de ejemplo &bull; Atención: Sample Client</span>
+      </div>
+      <h2 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight max-w-4xl mx-auto">
+        Panel Administrativo Central, Agente IA 24/7 y Ciberseguridad Blindada
+      </h2>
+      <p class="mt-4 text-base sm:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+        Diseñado para el liderazgo comercial e integración tecnológica. Control de stock en tiempo real para erradicar errores de inventario, atención continua en WhatsApp con derivación al propio equipo de ventas de Sample Client, y servidor blindado anti-hackeo.
+      </p>
+
+      <!-- Key Metrics Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 max-w-4xl mx-auto text-left">
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="flex items-center gap-2 text-brand-600 mb-1">
+            <i data-lucide="database" class="w-4 h-4"></i>
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Stock Real</span>
+          </div>
+          <div class="text-xl font-black text-slate-900">0% Errores</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">Validación determinista en vivo</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="flex items-center gap-2 text-emerald-600 mb-1">
+            <i data-lucide="message-square" class="w-4 h-4"></i>
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">WhatsApp 24/7</span>
+          </div>
+          <div class="text-xl font-black text-slate-900">24 Horas / 7 Días</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">Respuestas técnicas al segundo</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="flex items-center gap-2 text-amber-600 mb-1">
+            <i data-lucide="user-check" class="w-4 h-4"></i>
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Cierre de Ventas</span>
+          </div>
+          <div class="text-xl font-black text-slate-900">Equipo Sample</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">Traspaso al asesor de Sample Client</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="flex items-center gap-2 text-purple-600 mb-1">
+            <i data-lucide="shield" class="w-4 h-4"></i>
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Seguridad</span>
+          </div>
+          <div class="text-xl font-black text-slate-900">Anti-Hackeo</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">Tokens cifrados & DB aislada</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Marquee of Brands -->
+    <section class="border-y border-slate-200 bg-slate-50/60 py-8 overflow-hidden mb-16">
+      <div class="max-w-6xl mx-auto px-6 mb-4 flex items-center justify-between">
+        <span class="text-xs font-bold tracking-wider text-slate-500 uppercase flex items-center gap-2">
+          <i data-lucide="badge-check" class="w-4 h-4 text-brand-600"></i>
+          Ecosistema de Marcas y Referentes Técnicos
+        </span>
+        <span class="text-xs text-slate-500 hidden sm:inline">Arquitectura inspirada en la robustez de Syscom & Epcom</span>
+      </div>
+
+      <div class="flex gap-8 whitespace-nowrap overflow-hidden">
+        <div class="flex gap-12 items-center text-slate-700 font-bold text-sm tracking-wider animate-marquee">
+          <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-slate-200 shadow-xs">
+            <i data-lucide="radio-tower" class="w-4 h-4 text-brand-600"></i>
+            <span>MARCA ALIADA A</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-slate-200 shadow-xs">
+            <i data-lucide="cpu" class="w-4 h-4 text-emerald-600"></i>
+            <span>MARCA ALIADA B</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-slate-200 shadow-xs">
+            <i data-lucide="signal" class="w-4 h-4 text-blue-600"></i>
+            <span>MARCA ALIADA C</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-slate-200 shadow-xs">
+            <i data-lucide="layers" class="w-4 h-4 text-purple-600"></i>
+            <span>SYSCOM BENCHMARK</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-slate-200 shadow-xs">
+            <i data-lucide="lock" class="w-4 h-4 text-emerald-600"></i>
+            <span>EPCOM REPOSITORIO</span>
+          </div>
+          <!-- Loop duplicate -->
+          <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-slate-200 shadow-xs">
+            <i data-lucide="radio-tower" class="w-4 h-4 text-brand-600"></i>
+            <span>MARCA ALIADA A</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-slate-200 shadow-xs">
+            <i data-lucide="cpu" class="w-4 h-4 text-emerald-600"></i>
+            <span>MARCA ALIADA B</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 MÓDULOS DE LA SOLUCIÓN (Bento Grid 21st.dev) -->
+    <section id="modulos" class="max-w-6xl mx-auto px-6 py-12">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider mb-3">
+          <i data-lucide="component" class="w-3.5 h-3.5 text-brand-600"></i>
+          <span>Estructura de la Plataforma</span>
+        </div>
+        <h3 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">Los 3 Módulos de la Solución</h3>
+        <p class="text-slate-600 text-sm mt-3">Diseñados para otorgar control operativo absoluto, vender en automático y proteger sus activos digitales.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Module 1: Admin Panel -->
+        <div class="glass-card rounded-2xl p-7 flex flex-col justify-between transition-all duration-200 relative overflow-hidden group">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-600 mb-5 shadow-sm">
+              <i data-lucide="sliders" class="w-6 h-6"></i>
+            </div>
+            <span class="inline-block px-2.5 py-0.5 rounded text-[11px] font-bold bg-brand-100 text-brand-800 uppercase tracking-wide mb-2">Módulo 1 &bull; Control Central</span>
+            <h4 class="text-xl font-bold text-slate-900 mb-3">Panel Administrativo & Gestión</h4>
+            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+              Plataforma administrativa privada y exclusiva para Sample Client y su equipo. Administre productos, precios y disponibilidad en tiempo real sin intermediarios.
+            </p>
+
+            <ul class="space-y-3 text-xs text-slate-700">
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-600 shrink-0 mt-0.5"></i>
+                <span><strong>Inventario en Tiempo Real:</strong> Sincronización exacta de stock para no vender productos agotados (sample copy).</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-600 shrink-0 mt-0.5"></i>
+                <span><strong>Escalas por Volumen:</strong> Precios diferenciados por 1 unidad, 20 unidades o 100 unidades al instante.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-600 shrink-0 mt-0.5"></i>
+                <span><strong>Módulo de Liquidación:</strong> Sección de remates para rotar inventario antiguo a precios de oferta.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-brand-600">
+            <span>Portal Oficial de la Marca</span>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </div>
+        </div>
+
+        <!-- Module 2: AI WhatsApp Agent -->
+        <div class="glass-card rounded-2xl p-7 flex flex-col justify-between transition-all duration-200 border-brand-500/40 shadow-lg shadow-brand-500/5 relative overflow-hidden group">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 mb-5 shadow-sm">
+              <i data-lucide="message-circle" class="w-6 h-6"></i>
+            </div>
+            <span class="inline-block px-2.5 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800 uppercase tracking-wide mb-2">Módulo 2 &bull; Ventas 24/7</span>
+            <h4 class="text-xl font-bold text-slate-900 mb-3">Agente IA de Ventas en WhatsApp</h4>
+            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+              Atención comercial y asesoría técnica inmediata 24/7 en el número oficial de la empresa. Atiende prospectos nocturnos y de fin de semana sin demora.
+            </p>
+
+            <ul class="space-y-3 text-xs text-slate-700">
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
+                <span><strong>Asesoría Técnica Inmediata:</strong> Asesora según uso (fincas, seguridad, minería) y entrega fichas técnicas.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
+                <span><strong>Cotizaciones Inmediatas:</strong> Calcula montos exactos con base en el volumen solicitado por el cliente.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
+                <span><strong>Traspaso al Vendedor de Sample Client:</strong> La IA le notifica al WhatsApp del <strong>asesor comercial de Sample Client</strong> con el pedido listo para facturar.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-emerald-600">
+            <span>Handoff al Asesor de Sample Client</span>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </div>
+        </div>
+
+        <!-- Module 3: Security & Anti-Hacking -->
+        <div class="glass-card rounded-2xl p-7 flex flex-col justify-between transition-all duration-200 relative overflow-hidden group">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-slate-100 border border-slate-300 flex items-center justify-center text-slate-800 mb-5 shadow-sm">
+              <i data-lucide="shield-alert" class="w-6 h-6"></i>
+            </div>
+            <span class="inline-block px-2.5 py-0.5 rounded text-[11px] font-bold bg-slate-200 text-slate-800 uppercase tracking-wide mb-2">Módulo 3 &bull; Blindaje Total</span>
+            <h4 class="text-xl font-bold text-slate-900 mb-3">Infraestructura Anti-Hackeo</h4>
+            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+              Protección de nivel bancario diseñada específicamente para responder a la exigencia de Sample Client: blindar la información de clientes, precios mayoristas y catálogo.
+            </p>
+
+            <ul class="space-y-3 text-xs text-slate-700">
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-slate-900 shrink-0 mt-0.5"></i>
+                <span><strong>Aislamiento de Base de Datos:</strong> Prevención rigurosa de inyecciones SQL y accesos externos no autorizados.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-slate-900 shrink-0 mt-0.5"></i>
+                <span><strong>Tokens Cifrados de Sesión:</strong> Autenticación estricta para administradores sin exponer rutas vulnerables.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-slate-900 shrink-0 mt-0.5"></i>
+                <span><strong>Copias de Seguridad Continuas:</strong> Respaldo automático periódico para garantizar que nunca se pierdan datos.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-700">
+            <span>Servidor Protegido 24/7</span>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 21st.dev INTERACTIVE 3D CREDIT CARD & PAYMENT GATEWAY -->
+    <section id="pasarela-pago" class="max-w-5xl mx-auto px-6 py-16">
+      <div class="text-center max-w-xl mx-auto mb-10">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-bold uppercase tracking-wider mb-3">
+          <i data-lucide="credit-card" class="w-3.5 h-3.5"></i>
+          <span>Pasarela de Pago Segura Wompi & Bancolombia</span>
+        </div>
+        <h3 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">Formalización & Pago del Proyecto</h3>
+        <p class="text-slate-600 text-sm mt-2">Inversión respaldada con contrato, factura formal y garantía de entrega en 10 a 12 días.</p>
+      </div>
+
+      <!-- Main Payment Container -->
+      <div class="rounded-3xl border-2 border-slate-200 bg-white p-6 sm:p-10 shadow-2xl shadow-slate-900/5">
+        
+        <!-- Price Summary Header -->
+        <div class="p-6 rounded-2xl bg-slate-950 text-white flex flex-col sm:flex-row items-center justify-between gap-6 mb-10 shadow-inner">
+          <div>
+            <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Total Implementación Completa:</div>
+            <div class="flex items-baseline gap-3 mt-1">
+              <span class="text-3xl sm:text-4xl font-black text-white">$[PRECIO] <span class="text-lg font-medium text-slate-400">COP</span></span>
+              <span class="text-sm font-semibold text-slate-500 line-through">$[PRECIO] COP</span>
+            </div>
+            <div class="text-xs text-emerald-400 mt-1 font-medium flex items-center gap-1.5">
+              <i data-lucide="badge-percent" class="w-4 h-4"></i>
+              <span>Ahorro comercial directo de $[PRECIO] COP (Tarifa Fundador)</span>
+            </div>
+          </div>
+
+          <div class="text-right sm:border-l sm:border-slate-800 sm:pl-6 w-full sm:w-auto">
+            <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Mensualidad Operativa:</div>
+            <div class="text-2xl font-black text-amber-400 mt-1">$[PRECIO] <span class="text-xs font-medium text-slate-400">COP/mes</span></div>
+            <div class="text-[11px] text-slate-400 mt-0.5">Servidor seguro, soporte y WhatsApp IA</div>
+          </div>
+        </div>
+
+        <!-- Payment Mode Selector Tabs -->
+        <div class="mb-8">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-3">Seleccione el Monto a Cancelar:</label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <label class="relative flex items-start p-4 rounded-xl border-2 border-brand-600 bg-brand-50/50 cursor-pointer shadow-sm">
+              <input type="radio" name="payment-tier" value="anticipo" checked class="mt-1 text-brand-600 focus:ring-brand-500" onchange="updatePaymentMode(this.value)">
+              <div class="ml-3">
+                <span class="block text-sm font-extrabold text-slate-900">50% Anticipo de Inicio (Recomendado)</span>
+                <span class="block text-xs text-slate-600 mt-0.5">Paga <strong>$[PRECIO] COP</strong> para inicio de desarrollo y el 50% restante contra entrega y pruebas.</span>
+              </div>
+            </label>
+
+            <label class="relative flex items-start p-4 rounded-xl border border-slate-200 bg-white hover:border-slate-300 cursor-pointer">
+              <input type="radio" name="payment-tier" value="total" class="mt-1 text-brand-600 focus:ring-brand-500" onchange="updatePaymentMode(this.value)">
+              <div class="ml-3">
+                <span class="block text-sm font-extrabold text-slate-900">100% Pago de Contado</span>
+                <span class="block text-xs text-slate-600 mt-0.5">Paga <strong>$[PRECIO] COP</strong> y recibe 1 mes adicional de soporte y mantenimiento sin costo.</span>
+              </div>
+            </label>
+
+          </div>
+        </div>
+
+        <!-- Payment Method Tabs -->
+        <div class="flex border-b border-slate-200 mb-8 overflow-x-auto">
+          <button onclick="switchMethod('wompi')" id="tab-wompi" class="px-5 py-3 border-b-2 border-brand-600 text-brand-600 font-bold text-xs flex items-center gap-2 whitespace-nowrap">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            <span>Pasarela Wompi en Línea (PSE, Tarjetas, Nequi, Bancolombia)</span>
+          </button>
+          <button onclick="switchMethod('transfer')" id="tab-transfer" class="px-5 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-semibold text-xs flex items-center gap-2 whitespace-nowrap">
+            <i data-lucide="landmark" class="w-4 h-4"></i>
+            <span>Transferencia Directa Bancolombia</span>
+          </button>
+        </div>
+
+        <!-- Modern Direct Wompi Checkout Box -->
+        <div id="method-card-content" class="p-6 sm:p-8 rounded-2xl bg-slate-50/80 border border-slate-200">
+          <div class="max-w-2xl mx-auto text-center">
+            
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold mb-4">
+              <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+              <span>Pasarela Certificada PCI-DSS &bull; Wompi Bancolombia</span>
+            </div>
+
+            <h4 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">Pago Electrónico Inmediato & Seguro</h4>
+            <p class="text-xs text-slate-600 max-w-lg mx-auto mb-6 leading-relaxed">
+              Haz clic abajo para abrir la pasarela oficial. Podrás pagar de forma 100% segura con tu método preferido sin intermediarios.
+            </p>
+
+            <!-- Supported Payment Brands Grid / Badges -->
+            <div class="flex flex-wrap items-center justify-center gap-3 mb-8">
+              
+              <!-- Bancolombia -->
+              <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-slate-200 shadow-xs text-slate-800 font-bold text-xs">
+                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                <span>Bancolombia</span>
+              </div>
+
+              <!-- Nequi -->
+              <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-slate-200 shadow-xs text-slate-800 font-bold text-xs">
+                <span class="w-3 h-3 rounded-full bg-purple-600"></span>
+                <span>Nequi</span>
+              </div>
+
+              <!-- PSE -->
+              <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-slate-200 shadow-xs text-slate-800 font-bold text-xs">
+                <span class="w-3 h-3 rounded-full bg-blue-700"></span>
+                <span>PSE (Todos los Bancos)</span>
+              </div>
+
+              <!-- Visa -->
+              <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-slate-200 shadow-xs text-slate-800 font-black text-xs tracking-wider">
+                <span class="text-blue-800 italic">VISA</span>
+              </div>
+
+              <!-- Mastercard -->
+              <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-slate-200 shadow-xs text-slate-800 font-bold text-xs">
+                <div class="flex -space-x-1.5">
+                  <span class="w-3.5 h-3.5 rounded-full bg-red-500 inline-block"></span>
+                  <span class="w-3.5 h-3.5 rounded-full bg-amber-500 inline-block opacity-90"></span>
+                </div>
+                <span>Mastercard</span>
+              </div>
+
+              <!-- American Express -->
+              <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-slate-200 shadow-xs text-slate-800 font-bold text-xs">
+                <span class="text-cyan-700 font-black tracking-tight">AMEX</span>
+              </div>
+
+            </div>
+
+            <!-- Main High-Converting CTA Button -->
+            <button onclick="payWithWompi()" class="tactile-btn w-full max-w-lg mx-auto py-4 px-6 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-black text-sm sm:text-base shadow-xl shadow-brand-600/25 flex items-center justify-center gap-3">
+              <i data-lucide="lock" class="w-5 h-5"></i>
+              <span id="btn-pay-card-label">Pagar Anticipo de $[PRECIO] COP con Wompi &bull; Pago Seguro</span>
+            </button>
+
+            <!-- Trust Details Below CTA -->
+            <div class="flex flex-wrap items-center justify-center gap-6 text-[11px] text-slate-500 mt-5">
+              <span class="flex items-center gap-1.5">
+                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-600"></i>
+                Cifrado Bancario SSL 256-Bit
+              </span>
+              <span class="flex items-center gap-1.5">
+                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-600"></i>
+                Comprobante Digital Inmediato
+              </span>
+              <span class="flex items-center gap-1.5">
+                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-600"></i>
+                Factura Legal & Respaldo Monoga
+              </span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- TAB 3: Direct Transfer Content -->
+        <div id="method-transfer-content" class="hidden p-6 rounded-2xl bg-slate-50 border border-slate-200">
+          <div class="max-w-lg mx-auto space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-400 flex items-center justify-center text-slate-950 font-black text-sm">
+                BC
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-slate-900">Transferencia Directa Bancolombia</h4>
+                <p class="text-xs text-slate-500">Cuenta de Ahorros Empresarial &bull; Cero comisión</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white border border-slate-200 text-xs space-y-2 font-mono">
+              <div class="flex justify-between">
+                <span class="text-slate-500">Banco:</span>
+                <span class="font-bold text-slate-900">Bancolombia</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-500">Tipo de Cuenta:</span>
+                <span class="font-bold text-slate-900">Ahorros</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-500">Titular:</span>
+                <span class="font-bold text-slate-900">Sales Lead / Dirección Comercial</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-500">Monto Anticipo 50%:</span>
+                <span class="font-bold text-emerald-600">$[PRECIO] COP</span>
+              </div>
+            </div>
+
+            <a href="https://wa.me/570000000000?text=Hola%20Sales Lead,%20voy%20a%20hacer%20la%20transferencia%20del%20anticipo%20de%20$[PRECIO]%20para%20Sample Telecom Co..%20Por%20favor%20conf%C3%ADrmame%20el%20n%C3%BAmero%20de%20cuenta." target="_blank" class="tactile-btn w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm">
+              <i data-lucide="message-circle" class="w-4 h-4"></i>
+              <span>Pedir Número de Cuenta a Sales Lead por WhatsApp</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="max-w-4xl mx-auto px-6 py-12">
+      <h4 class="text-xl font-bold text-slate-900 mb-6 text-center">Preguntas Frecuentes de la Implementación</h4>
+      
+      <div class="space-y-3">
+        
+        <details class="group border border-slate-200 rounded-xl bg-white p-4 [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+          <summary class="flex items-center justify-between font-bold text-sm text-slate-900">
+            <span>¿Cómo garantizamos que no ocurran los errores de inventario?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+            Nuestra Inteligencia Artificial opera conectada directamente a la base de datos de su Panel Administrativo mediante validación determinista. Si un producto no tiene unidades en stock positivo, el agente lo indica y sugiere una referencia equivalente del catálogo.
+          </p>
+        </details>
+
+        <details class="group border border-slate-200 rounded-xl bg-white p-4 [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+          <summary class="flex items-center justify-between font-bold text-sm text-slate-900">
+            <span>¿Cómo se protege el sistema contra hackeos y descargas no autorizadas?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+            El servidor se despliega con arquitectura de solo lectura para archivos maestros, sin puertos de base de datos expuestos a internet público y con tokens de sesión con cifrado bancario.
+          </p>
+        </details>
+
+        <details class="group border border-slate-200 rounded-xl bg-white p-4 [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+          <summary class="flex items-center justify-between font-bold text-sm text-slate-900">
+            <span>¿A quién le llegan los clientes cuando quieren cerrar una compra en WhatsApp?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+            Le llegan directamente al equipo comercial o vendedor asignado por Sample Client en Sample Telecom Co. con el resumen completo del pedido para facturar.
+          </p>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="max-w-6xl mx-auto px-6 py-12 border-t border-slate-200 text-center text-xs text-slate-500">
+      <p class="font-semibold text-slate-700">Sample Telecom Co. &bull; Soluciones Oficiales (texto de ejemplo)</p>
+      <p class="mt-1">Propuesta comercial privada preparada por Sales Lead & Equipo de Desarrollo Tecnológico &bull; 2026</p>
+    </footer>
+
+  </main>
+
+  <!-- Sticky CTA Floating Bar -->
+  <div id="sticky-bar" class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 py-3 px-6 shadow-xl transform translate-y-full transition-transform duration-300">
+    <div class="max-w-6xl mx-auto flex items-center justify-between gap-4">
+      <div class="hidden sm:flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-brand-950 flex items-center justify-center text-brand-500">
+          <i data-lucide="radio" class="w-4 h-4"></i>
+        </div>
+        <div>
+          <div class="text-xs font-black text-slate-900">SAMPLE TELECOM CO.</div>
+          <div class="text-[11px] text-slate-500">Bienvenido a tu nuevo negocio 2026</div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4 w-full sm:w-auto justify-end">
+        <div class="text-right">
+          <div class="text-xs text-slate-400 line-through hidden sm:block">$[PRECIO] COP</div>
+          <div class="text-base sm:text-lg font-black text-slate-900">$[PRECIO] <span class="text-xs font-normal text-slate-500">COP</span></div>
+        </div>
+        <a href="#pasarela-pago" class="tactile-btn py-2.5 px-5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-extrabold text-xs shadow-md shadow-brand-600/20 whitespace-nowrap">
+          Pagar con Wompi
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // 1. EXACT SCROLL EXPANSION HERO LOGIC (ScrollExpandMedia 21st.dev formula)
+    const heroWrapper = document.getElementById('scroll-hero-wrapper');
+    const heroMediaBox = document.getElementById('hero-media-box');
+    const heroBgLayer = document.getElementById('hero-bg-layer');
+    const heroTitleFirst = document.getElementById('hero-title-first');
+    const heroTitleRest = document.getElementById('hero-title-rest');
+    const heroSubdate = document.getElementById('hero-subdate');
+    const heroSubexpand = document.getElementById('hero-subexpand');
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const isMobile = window.innerWidth < 768;
+      
+      // Calculate scroll progress through the hero wrapper height
+      const totalHeroScroll = heroWrapper.offsetHeight - window.innerHeight;
+      const progress = Math.min(Math.max(scrollY / totalHeroScroll, 0), 1);
+
+      // Width & Height expansion formulas:
+      const targetWidth = 340 + progress * (isMobile ? 550 : 1100);
+      const targetHeight = 440 + progress * (isMobile ? 250 : 420);
+      const textTranslateX = progress * (isMobile ? 180 : 150);
+
+      heroMediaBox.style.width = `${targetWidth}px`;
+      heroMediaBox.style.height = `${targetHeight}px`;
+
+      // Background fade
+      heroBgLayer.style.opacity = `${1 - progress}`;
+
+      // Split title translation
+      heroTitleFirst.style.transform = `translateX(-${textTranslateX}vw)`;
+      heroTitleRest.style.transform = `translateX(${textTranslateX}vw)`;
+      heroSubdate.style.transform = `translateX(-${textTranslateX}vw)`;
+      heroSubexpand.style.transform = `translateX(${textTranslateX}vw)`;
+
+      // Sticky Bar trigger
+      const stickyBar = document.getElementById('sticky-bar');
+      const checkoutEl = document.getElementById('pasarela-pago');
+      const rect = checkoutEl.getBoundingClientRect();
+      if (scrollY > window.innerHeight * 1.5 && rect.top > window.innerHeight) {
+        stickyBar.classList.remove('translate-y-full');
+      } else {
+        stickyBar.classList.add('translate-y-full');
+      }
+    });
+
+    // 2. PAYMENT MODE & METHOD CONTROLS
+    let currentMode = 'anticipo';
+    function updatePaymentMode(mode) {
+      currentMode = mode;
+      const btnLabel = document.getElementById('btn-pay-card-label');
+      if (mode === 'anticipo') {
+        btnLabel.textContent = 'Pagar Anticipo de $[PRECIO] COP con Wompi • Pago Seguro';
+      } else {
+        btnLabel.textContent = 'Pagar Total Contado de $[PRECIO] COP con Wompi • Pago Seguro';
+      }
+    }
+
+    function switchMethod(method) {
+      const wompiTab = document.getElementById('tab-wompi');
+      const transferTab = document.getElementById('tab-transfer');
+      const wompiContent = document.getElementById('method-card-content');
+      const transferContent = document.getElementById('method-transfer-content');
+
+      if (method === 'wompi') {
+        wompiTab.className = 'px-5 py-3 border-b-2 border-brand-600 text-brand-600 font-bold text-xs flex items-center gap-2 whitespace-nowrap';
+        transferTab.className = 'px-5 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-semibold text-xs flex items-center gap-2 whitespace-nowrap';
+        wompiContent.classList.remove('hidden');
+        transferContent.classList.add('hidden');
+      } else if (method === 'transfer') {
+        transferTab.className = 'px-5 py-3 border-b-2 border-brand-600 text-brand-600 font-bold text-xs flex items-center gap-2 whitespace-nowrap';
+        wompiTab.className = 'px-5 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-semibold text-xs flex items-center gap-2 whitespace-nowrap';
+        transferContent.classList.remove('hidden');
+        wompiContent.classList.add('hidden');
+      }
+    }
+
+    // PAYMENT CONFIGURATION (sample: placeholders only; compute the integrity hash on a server, never in the browser)
+    const WOMPI_CONFIG = {
+      publicKey: 'pub_test_REPLACE_ME',
+      integritySecret: 'REPLACE_ME_SERVER_SIDE_ONLY',
+      currency: 'COP',
+      redirectUrl: '/cotizacion/?status=success'
+    };
+
+    async function generateWompiIntegrity(reference, amountInCents, currency, integritySecret) {
+      const rawText = `${reference}${amountInCents}${currency}${integritySecret}`;
+      const msgBuffer = new TextEncoder().encode(rawText);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function payWithWompi(overrideMode) {
+      if (WOMPI_CONFIG.publicKey.includes('REPLACE_ME')) { alert('Demo: configure su proveedor de pago antes de usar este botón.'); return; }
+      const mode = overrideMode || currentMode;
+      const amountInCents = mode === 'anticipo' ? 0 : 0;
+      const reference = `SAMPLE-${Date.now()}`;
+      
+      confetti({ particleCount: 60, spread: 60, origin: { y: 0.6 } });
+
+      try {
+        const integrityHash = await generateWompiIntegrity(
+          reference,
+          amountInCents,
+          WOMPI_CONFIG.currency,
+          WOMPI_CONFIG.integritySecret
+        );
+
+        if (typeof WidgetCheckout === 'undefined') {
+          alert('Inicializando pasarela segura de Wompi... Por favor presione de nuevo en un instante.');
+          return;
+        }
+
+        const checkout = new WidgetCheckout({
+          currency: WOMPI_CONFIG.currency,
+          amountInCents: amountInCents,
+          reference: reference,
+          publicKey: WOMPI_CONFIG.publicKey,
+          signature: {
+            integrity: integrityHash
+          },
+          redirectUrl: WOMPI_CONFIG.redirectUrl
+        });
+
+        checkout.open(function (result) {
+          const transaction = result.transaction;
+          if (transaction) {
+            if (transaction.status === 'APPROVED') {
+              confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 } });
+              alert(`¡Pago Aprobado con Éxito!\n\nReferencia: ${transaction.reference}\nID Transacción: ${transaction.id}\n\nSample Client, hemos reservado tu cupo Fundador. El equipo comercial de Monoga te contactará de inmediato.`);
+            } else if (transaction.status === 'PENDING') {
+              alert(`Transacción en proceso (Pendiente de confirmación bancaria).\n\nReferencia: ${transaction.reference}\nID: ${transaction.id}`);
+            } else if (transaction.status === 'DECLINED') {
+              alert(`La transacción no pudo ser completada. Por favor verifica tus datos o intenta con otro medio de pago.`);
+            }
+          }
+        });
+      } catch (err) {
+        console.error('Error abriendo checkout de Wompi:', err);
+        alert('Error conectando con la pasarela de pagos: ' + err.message);
+      }
+    }
+
+    function submitCardPayment() {
+      payWithWompi(currentMode);
+    }
+
+    function startCountdown() {
+      let hours = 23, minutes = 48, seconds = 15;
+      const el = document.getElementById('countdown-timer');
+      setInterval(() => {
+        if (seconds > 0) seconds--;
+        else {
+          seconds = 59;
+          if (minutes > 0) minutes--;
+          else {
+            minutes = 59;
+            if (hours > 0) hours--;
+          }
+        }
+        el.textContent = `${hours}h ${minutes < 10 ? '0' : ''}${minutes}m ${seconds < 10 ? '0' : ''}${seconds}s`;
+      }, 1000);
+    }
+    startCountdown();
+  </script>
+</body>
+</html>

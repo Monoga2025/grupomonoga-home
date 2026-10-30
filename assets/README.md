@@ -7,5 +7,6 @@ Images used by the site: hero visuals and background textures.
 - `bg_desk_papers.jpg`
 - `hero_dashboard.jpg`
 - `hero_studio.jpg`
+- `media_dashboard.jpg` (used by `cotizacion/`)
 
 Part of the [repository](../README.md).
