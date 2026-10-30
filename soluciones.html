@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soluciones de Software & Agentes IA | Grupo Monoga</title>
+  <meta name="description" content="Ecosistemas de software a medida, paneles administrativos privados, agentes conversacionales 24/7 y seguridad cloud para empresas.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              200: '#bae0fd',
+              500: '#0072f5',
+              600: '#0058ca',
+              700: '#0047a5',
+              800: '#033b85',
+              900: '#06326e',
+              950: '#031c42',
+            }
+          },
+          animation: {
+            'shimmer': 'shimmer 2.5s linear infinite',
+            'marquee': 'marquee 28s linear infinite',
+          },
+          keyframes: {
+            shimmer: {
+              from: { backgroundPosition: '0 0' },
+              to: { backgroundPosition: '-200% 0' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #07090e;
+      color: #f8fafc;
+      overflow-x: hidden;
+    }
+    .ambient-glow-top {
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(0, 114, 245, 0.12) 0%, transparent 70%);
+      filter: blur(140px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ambient-glow-center {
+      position: absolute;
+      top: 50%;
+      left: -120px;
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(5, 150, 105, 0.08) 0%, transparent 70%);
+      filter: blur(140px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .shimmer-badge {
+      background: linear-gradient(90deg, rgba(255,255,255,0.05) 0%, rgba(0,114,245,0.25) 50%, rgba(255,255,255,0.05) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 3s infinite;
+    }
+    .tactile-btn {
+      transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 140ms cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .tactile-btn:hover { transform: translateY(-2px); }
+    .tactile-btn:active { transform: scale(0.975) translateY(1px); }
+    .glass-card {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.5);
+    }
+    .glass-card:hover {
+      border-color: rgba(0, 114, 245, 0.4);
+      box-shadow: 0 25px 60px -15px rgba(0, 114, 245, 0.12);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-slate-100 bg-[#07090e] relative selection:bg-brand-500 selection:text-white">
+
+  <div class="ambient-glow-top"></div>
+  <div class="ambient-glow-center"></div>
+
+  <!-- NAVIGATION BAR -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-[#07090e]/80 backdrop-blur-xl border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600 to-slate-900 border border-brand-400/30 flex items-center justify-center text-white font-black text-sm shadow-lg shadow-brand-600/20 group-hover:scale-105 transition-transform">
+          <i data-lucide="cpu" class="w-5 h-5 text-brand-300"></i>
+        </div>
+        <div>
+          <span class="text-base font-black tracking-tight text-white">GRUPO MONOGA</span>
+          <span class="block text-[10px] font-mono font-bold uppercase tracking-widest text-brand-400">Enterprise AI & Software</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-xs font-bold text-slate-300">
+        <a href="soluciones.html" class="text-brand-400 transition-colors">Soluciones</a>
+        <a href="agentes-ia.html" class="hover:text-white transition-colors">Agentes IA</a>
+        <a href="casos-de-exito.html" class="hover:text-white transition-colors">Casos de Éxito</a>
+        <a href="contacto.html" class="hover:text-white transition-colors">Contacto</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/570000000000?text=Hola%20Grupo%20Monoga,%20quiero%20conocer%20m%C3%A1s%20sobre%20sus%20soluciones%20de%20software." target="_blank" class="tactile-btn inline-flex items-center gap-2 py-2.5 px-5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs shadow-lg shadow-brand-600/30">
+          <i data-lucide="message-square" class="w-4 h-4"></i>
+          <span>Cotizar Solución</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <main class="pt-32 pb-20 px-6 max-w-7xl mx-auto relative z-10">
+    <div class="text-center max-w-4xl mx-auto mb-20">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-500/30 shimmer-badge text-brand-300 text-xs font-mono font-bold uppercase tracking-wider mb-6">
+        <i data-lucide="layers" class="w-3.5 h-3.5 text-brand-400"></i>
+        <span>Catálogo Integral de Ingeniería 2026</span>
+      </div>
+      <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight leading-[1.08] mb-6">
+        ARQUITECTURA DE SOFTWARE <br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-emerald-400 to-blue-400">
+          DISEÑADA PARA ESCALAR VENTAS
+        </span>
+      </h1>
+      <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+        Entregamos infraestructura digital propietaria lista para producción en días. Soluciones robustas, auditadas y conectadas a tus procesos reales.
+      </p>
+    </div>
+
+    <!-- 4 DETAILED SOLUTION MODULES -->
+    <div class="space-y-12 mb-24">
+      
+      <!-- Module 1 -->
+      <div class="glass-card rounded-3xl p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 space-y-5">
+          <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400">
+            <i data-lucide="layout-dashboard" class="w-6 h-6"></i>
+          </div>
+          <span class="text-xs font-mono font-bold uppercase text-brand-400 tracking-wider block">Solución 01 &bull; Control Central</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white">Paneles Administrativos Privados (Monoga OS)</h2>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Plataformas web administrativas privadas para que los dueños de negocio y sus equipos controlen productos, precios, márgenes por escala y facturación en tiempo real.
+          </p>
+          <ul class="space-y-2.5 text-xs text-slate-300 font-medium">
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+              <span><strong>Inventario Determinista:</strong> Sincronización exacta en tiempo real para evitar ventas de artículos agotados.</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+              <span><strong>Escalas por Volumen B2B:</strong> Tarifas diferenciadas automáticas para distribuidores e integradores.</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+              <span><strong>Módulo de Liquidaciones:</strong> Sección de ofertas rápidas para rotar inventario inmovilizado.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="lg:col-span-5 p-6 rounded-2xl bg-black/60 border border-white/10 font-mono text-xs text-slate-300 space-y-3">
+          <div class="text-slate-500 pb-2 border-b border-white/10">// Especificaciones Técnicas</div>
+          <div class="flex justify-between"><span class="text-slate-400">Stack:</span><span class="text-brand-400 font-bold">Next.js + TypeScript</span></div>
+          <div class="flex justify-between"><span class="text-slate-400">Database:</span><span class="text-white font-bold">PostgreSQL / SQLite Aislada</span></div>
+          <div class="flex justify-between"><span class="text-slate-400">Despliegue:</span><span class="text-emerald-400 font-bold">Docker Container Cloud</span></div>
+          <div class="flex justify-between"><span class="text-slate-400">Tiempo Entrega:</span><span class="text-amber-400 font-bold">7 a 10 Días</span></div>
+        </div>
+      </div>
+
+      <!-- Module 2 -->
+      <div class="glass-card rounded-3xl p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 space-y-5">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+            <i data-lucide="message-square" class="w-6 h-6"></i>
+          </div>
+          <span class="text-xs font-mono font-bold uppercase text-emerald-400 tracking-wider block">Solución 02 &bull; Automatización Comercial</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white">Agentes de Ventas Autónomos en WhatsApp 24/7</h2>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Agentes conversacionales impulsados por Inteligencia Artificial de última generación con capacidad de responder consultas técnicas complejas, cotizar al instante y filtrar clientes calificados.
+          </p>
+          <ul class="space-y-2.5 text-xs text-slate-300 font-medium">
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+              <span><strong>Cero Tiempo de Espera:</strong> Atención inmediata sin dejar enfriar al prospecto.</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+              <span><strong>Traspaso Asistido a Asesor:</strong> Envío de resumen estructurado del pedido a tu equipo comercial.</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+              <span><strong>Conexión WhatsApp Cloud Oficial:</strong> Sin riesgo de bloqueos por spam usando la API oficial.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="lg:col-span-5 p-6 rounded-2xl bg-black/60 border border-white/10 font-mono text-xs text-slate-300 space-y-3">
+          <div class="text-slate-500 pb-2 border-b border-white/10">// Especificaciones Técnicas</div>
+          <div class="flex justify-between"><span class="text-slate-400">Framework:</span><span class="text-brand-400 font-bold">OpenClaw Agent Core</span></div>
+          <div class="flex justify-between"><span class="text-slate-400">API:</span><span class="text-white font-bold">Meta WhatsApp Cloud</span></div>
+          <div class="flex justify-between"><span class="text-slate-400">Latencia:</span><span class="text-emerald-400 font-bold">&lt; 1.5 Segundos</span></div>
+          <div class="flex justify-between"><span class="text-slate-400">Disponibilidad:</span><span class="text-amber-400 font-bold">99.9% 24 Horas</span></div>
+        </div>
+      </div>
+
+      <!-- Module 3 -->
+      <div class="glass-card rounded-3xl p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 space-y-5">
+          <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+          </div>
+          <span class="text-xs font-mono font-bold uppercase text-purple-400 tracking-wider block">Solución 03 &bull; Blindaje Digital</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white">Ciberseguridad & Infraestructura Cloud Aislada</h2>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Protegemos la información sensible de tu empresa. Arquitectura con bases de datos en redes privadas virtuales no expuestas a internet público y tokens de sesión con cifrado bancario.
+          </p>
+          <ul class="space-y-2.5 text-xs text-slate-300 font-medium">
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+              <span><strong>Zero-Trust Access:</strong> Acceso administrativo estrictamente restringido por credenciales cifradas.</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+              <span><strong>Prevención de Extracción:</strong> Protección contra scrapers masivos y robo de base de clientes.</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+              <span><strong>Copias de Seguridad Continuas:</strong> Respaldos automáticos en almacenamiento cloud redundante.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="lg:col-span-5 p-6 rounded-2xl bg-black/60 border border-white/10 font-mono text-xs text-slate-300 space-y-3">
+          <div class="text-slate-500 pb-2 border-b border-white/10">// Especificaciones Técnicas</div>
+          <div class="flex justify-between"><span class="text-slate-400">Cifrado:</span><span class="text-brand-400 font-bold">AES-256 & SSL TLS 1.3</span></div>
+          <div class="flex justify-between"><span class="text-slate-400">DB Exposure:</span><span class="text-emerald-400 font-bold">0 Puertos Públicos</span></div>
+          <div class="flex justify-between"><span class="text-slate-400">Firewall:</span><span class="text-white font-bold">Cloudflare WAF / Cloud</span></div>
+          <div class="flex justify-between"><span class="text-slate-400">Monitoreo:</span><span class="text-amber-400 font-bold">Alertas en Tiempo Real</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA FOOTER SECTION -->
+    <div class="rounded-3xl bg-gradient-to-b from-slate-900 to-black border border-brand-500/30 text-white p-8 sm:p-14 text-center">
+      <h2 class="text-2xl sm:text-4xl font-black mb-4">¿Qué Solución Requiere tu Negocio Hoy?</h2>
+      <p class="text-slate-300 text-xs sm:text-sm max-w-xl mx-auto mb-8">
+        Hablemos directamente por WhatsApp. Te asesoraremos sin costo sobre la mejor arquitectura para tu empresa.
+      </p>
+      <a href="https://wa.me/570000000000?text=Hola%20Grupo%20Monoga,%20estuve%20viendo%20sus%20soluciones%20y%20quiero%20cotizar%20un%20proyecto." target="_blank" class="tactile-btn inline-flex items-center gap-2 py-4 px-8 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-extrabold text-sm shadow-xl shadow-brand-600/30">
+        <i data-lucide="message-square" class="w-4 h-4"></i>
+        <span>Solicitar Cotización por WhatsApp</span>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/10 bg-black/80 py-12 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-brand-600/20 border border-brand-500/30 flex items-center justify-center text-white font-black text-xs">
+          <i data-lucide="cpu" class="w-4 h-4 text-brand-400"></i>
+        </div>
+        <div>
+          <div class="font-bold text-white">GRUPO MONOGA</div>
+          <div class="text-[11px] text-slate-500 font-mono">Ingeniería de Software &bull; Monoga OS 2026</div>
+        </div>
+      </div>
+      <div class="flex gap-6 font-semibold text-slate-400">
+        <a href="soluciones.html" class="hover:text-white">Soluciones</a>
+        <a href="agentes-ia.html" class="hover:text-white">Agentes IA</a>
+        <a href="casos-de-exito.html" class="hover:text-white">Casos</a>
+        <a href="contacto.html" class="hover:text-white">Contacto</a>
+      </div>
+      <div>&copy; 2026 Grupo Monoga. Todos los derechos reservados.</div>
+    </div>
+  </footer>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

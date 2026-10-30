@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentes de IA en WhatsApp 24/7 | Grupo Monoga</title>
+  <meta name="description" content="Agentes conversacionales inteligentes en WhatsApp con conexión a stock real, cotización al instante y traspaso calificado a asesores comerciales.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              200: '#bae0fd',
+              500: '#0072f5',
+              600: '#0058ca',
+              700: '#0047a5',
+              800: '#033b85',
+              900: '#06326e',
+              950: '#031c42',
+            }
+          },
+          animation: {
+            'shimmer': 'shimmer 2.5s linear infinite',
+          },
+          keyframes: {
+            shimmer: {
+              from: { backgroundPosition: '0 0' },
+              to: { backgroundPosition: '-200% 0' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { background-color: #07090e; color: #f8fafc; overflow-x: hidden; }
+    .ambient-glow-top {
+      position: absolute; top: -80px; right: -80px; width: 650px; height: 650px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
+      filter: blur(140px); pointer-events: none; z-index: 0;
+    }
+    .ambient-glow-center {
+      position: absolute; top: 50%; left: -120px; width: 650px; height: 650px;
+      background: radial-gradient(circle, rgba(0, 114, 245, 0.08) 0%, transparent 70%);
+      filter: blur(140px); pointer-events: none; z-index: 0;
+    }
+    .shimmer-badge {
+      background: linear-gradient(90deg, rgba(255,255,255,0.05) 0%, rgba(16,185,129,0.25) 50%, rgba(255,255,255,0.05) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 3s infinite;
+    }
+    .tactile-btn { transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 140ms cubic-bezier(0.23, 1, 0.32, 1); }
+    .tactile-btn:hover { transform: translateY(-2px); }
+    .tactile-btn:active { transform: scale(0.975) translateY(1px); }
+    .glass-card {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.5);
+    }
+    .glass-card:hover {
+      border-color: rgba(16, 185, 129, 0.4);
+      box-shadow: 0 25px 60px -15px rgba(16, 185, 129, 0.12);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-slate-100 bg-[#07090e] relative selection:bg-emerald-500 selection:text-white">
+
+  <div class="ambient-glow-top"></div>
+  <div class="ambient-glow-center"></div>
+
+  <!-- NAVIGATION BAR -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-[#07090e]/80 backdrop-blur-xl border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-600 to-slate-900 border border-emerald-400/30 flex items-center justify-center text-white font-black text-sm shadow-lg shadow-emerald-600/20 group-hover:scale-105 transition-transform">
+          <i data-lucide="bot" class="w-5 h-5 text-emerald-300"></i>
+        </div>
+        <div>
+          <span class="text-base font-black tracking-tight text-white">GRUPO MONOGA</span>
+          <span class="block text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-400">Autonomous AI Agents</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-xs font-bold text-slate-300">
+        <a href="soluciones.html" class="hover:text-white transition-colors">Soluciones</a>
+        <a href="agentes-ia.html" class="text-emerald-400 transition-colors">Agentes IA</a>
+        <a href="casos-de-exito.html" class="hover:text-white transition-colors">Casos de Éxito</a>
+        <a href="contacto.html" class="hover:text-white transition-colors">Contacto</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/570000000000?text=Hola%20Grupo%20Monoga,%20quiero%20implementar%20un%20agente%20de%20IA%20en%20WhatsApp%20para%20mi%20empresa." target="_blank" class="tactile-btn inline-flex items-center gap-2 py-2.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg shadow-emerald-600/30">
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          <span>Probar Agente en Vivo</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="pt-32 pb-20 px-6 max-w-7xl mx-auto relative z-10">
+    
+    <!-- Hero Header -->
+    <div class="text-center max-w-4xl mx-auto mb-20">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/30 shimmer-badge text-emerald-300 text-xs font-mono font-bold uppercase tracking-wider mb-6">
+        <i data-lucide="zap" class="w-3.5 h-3.5 text-emerald-400"></i>
+        <span>WhatsApp Cloud API &bull; OpenClaw AI Core</span>
+      </div>
+      <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight leading-[1.08] mb-6">
+        AGENTES DE VENTAS EN WHATSAPP <br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
+          QUE NUNCA DUERMEN Y NUNCA SE EQUIVOCAN
+        </span>
+      </h1>
+      <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+        Transformamos tu WhatsApp en una máquina autónoma de ventas. Respuestas técnicas exactas en 1.5 segundos, verificación determinista de stock y traspaso calificado a tus vendedores.
+      </p>
+    </div>
+
+    <!-- INTERACTIVE SIMULATOR & ARCHITECTURE GRID -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-24 items-center">
+      
+      <!-- Interactive Chat Simulator Card -->
+      <div class="lg:col-span-6 glass-card rounded-3xl p-6 sm:p-8 border border-emerald-500/30 relative">
+        <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
+            <div>
+              <div class="text-xs font-bold text-white">Simulador Agente Monoga IA</div>
+              <div class="text-[10px] text-slate-400 font-mono">Conectado a Base de Datos en Vivo</div>
+            </div>
+          </div>
+          <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-300">ONLINE 24/7</span>
+        </div>
+
+        <!-- Chat Messages Container -->
+        <div id="sim-chat-box" class="space-y-3.5 h-[340px] overflow-y-auto pr-2 text-xs">
+          <div class="flex items-start gap-2.5">
+            <div class="w-7 h-7 rounded-full bg-emerald-600 flex items-center justify-center text-white text-[10px] font-bold shrink-0">IA</div>
+            <div class="p-3 rounded-2xl rounded-tl-none bg-slate-800 text-slate-200 leading-relaxed max-w-[85%] border border-white/5">
+              ¡Hola! Bienvenido al canal oficial. ¿En qué referencia o solución técnica puedo asesorarte hoy?
+            </div>
+          </div>
+
+          <div class="flex items-start gap-2.5 justify-end">
+            <div class="p-3 rounded-2xl rounded-tr-none bg-emerald-600 text-white leading-relaxed max-w-[85%] font-medium">
+              Hola, necesito cotizar 20 unidades del radio Icom IC-V86 para entrega inmediata en Bucaramanga. ¿Tienen stock y qué precio me dejan?
+            </div>
+          </div>
+
+          <div class="flex items-start gap-2.5">
+            <div class="w-7 h-7 rounded-full bg-emerald-600 flex items-center justify-center text-white text-[10px] font-bold shrink-0">IA</div>
+            <div class="p-3 rounded-2xl rounded-tl-none bg-slate-800 text-slate-200 leading-relaxed max-w-[85%] border border-white/5 space-y-2">
+              <p>Consultando base de datos de stock...</p>
+              <div class="p-2.5 rounded-xl bg-slate-900 border border-emerald-500/20 font-mono text-[11px] text-emerald-300 space-y-1">
+                <div>✓ <strong>Modelo:</strong> Icom IC-V86 (VHF 7W)</div>
+                <div>✓ <strong>Stock Disponible:</strong> 48 unidades en bodega</div>
+                <div>✓ <strong>Escala x20 unids:</strong> $465.000 COP c/u</div>
+                <div>✓ <strong>Total:</strong> $9.300.000 COP (IVA incluido)</div>
+              </div>
+              <p>¿Deseas que transfiera tu pedido al asesor comercial para emitir la factura formal o prefieres enlace de pago por Wompi PSE?</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 pt-4 border-t border-white/10 flex items-center gap-2">
+          <input type="text" placeholder="Simula una pregunta técnica o pedido..." class="flex-1 px-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500">
+          <button onclick="alert('En producción el agente responde en tiempo real en tu propio número de WhatsApp.')" class="tactile-btn px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs">
+            Enviar
+          </button>
+        </div>
+      </div>
+
+      <!-- Feature Architecture Breakdown -->
+      <div class="lg:col-span-6 space-y-6">
+        <div class="space-y-2">
+          <span class="text-xs font-mono font-bold uppercase text-emerald-400 tracking-wider">Flujo de Ejecución Monoga</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white">¿Cómo Funciona en tu Empresa?</h2>
+        </div>
+
+        <div class="space-y-4 text-xs sm:text-sm">
+          <div class="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-4">
+            <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono font-bold shrink-0">1</div>
+            <div>
+              <h3 class="font-bold text-white mb-1">Entrenamiento con Documentación Real</h3>
+              <p class="text-slate-400 text-xs leading-relaxed">Cargamos tus catálogos, fichas técnicas en PDF, políticas de garantía y precios. El agente jamás inventa datos.</p>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-4">
+            <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono font-bold shrink-0">2</div>
+            <div>
+              <h3 class="font-bold text-white mb-1">Validación Determinista de Inventario</h3>
+              <p class="text-slate-400 text-xs leading-relaxed">Conectado a tu panel Monoga OS. Si no hay stock positivo, el agente lo indica y ofrece la referencia alterna oficial.</p>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-4">
+            <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono font-bold shrink-0">3</div>
+            <div>
+              <h3 class="font-bold text-white mb-1">Traspaso Asistido con Ficha de Cliente</h3>
+              <p class="text-slate-400 text-xs leading-relaxed">Cuando el cliente decide comprar, el agente notifica a tu vendedor en WhatsApp con el resumen estructurado para facturar.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PRICING TIERS -->
+    <div class="mb-20">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs font-mono font-bold uppercase text-emerald-400 tracking-wider block mb-2">Planes de Implementación</span>
+        <h2 class="text-3xl sm:text-4xl font-black text-white">Inversión Clara & Escalable</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="glass-card rounded-3xl p-8 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-mono font-bold uppercase text-slate-400">Starter</span>
+            <h3 class="text-xl font-bold text-white mt-1 mb-4">Agente Básico</h3>
+            <div class="text-3xl font-black text-white font-mono mb-6">$1.800.000 <span class="text-xs text-slate-400 font-sans font-normal">COP único</span></div>
+            <ul class="space-y-3 text-xs text-slate-300">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> WhatsApp Cloud API 1 línea</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Hasta 200 consultas/día</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Catálogo de hasta 50 productos</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/570000000000?text=Hola%20Grupo%20Monoga,%20me%20interesa%20el%20plan%20Starter%20de%20Agentes%20IA." target="_blank" class="tactile-btn w-full py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs text-center mt-8 block">
+            Elegir Starter
+          </a>
+        </div>
+
+        <div class="glass-card rounded-3xl p-8 border-emerald-500/50 shadow-2xl shadow-emerald-500/10 flex flex-col justify-between relative">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-emerald-500 text-slate-950 font-black text-[10px] uppercase font-mono tracking-wider">
+            MÁS POPULAR
+          </div>
+          <div>
+            <span class="text-xs font-mono font-bold uppercase text-emerald-400">Enterprise Pro</span>
+            <h3 class="text-xl font-bold text-white mt-1 mb-4">Agente + Panel de Stock</h3>
+            <div class="text-3xl font-black text-emerald-400 font-mono mb-6">$3.800.000 <span class="text-xs text-slate-400 font-sans font-normal">COP único</span></div>
+            <ul class="space-y-3 text-xs text-slate-300">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Agente WhatsApp ilimitado</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Panel Web Administrativo Monoga OS</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Sincronización determinista de stock</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Traspaso automático a vendedores</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/570000000000?text=Hola%20Grupo%20Monoga,%20me%20interesa%20el%20plan%20Enterprise%20Pro%20de%20Agentes%20IA." target="_blank" class="tactile-btn w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs text-center mt-8 block shadow-lg shadow-emerald-600/30">
+            Elegir Enterprise Pro
+          </a>
+        </div>
+
+        <div class="glass-card rounded-3xl p-8 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-mono font-bold uppercase text-purple-400">Custom Ecosystem</span>
+            <h3 class="text-xl font-bold text-white mt-1 mb-4">Ecosistema a Medida</h3>
+            <div class="text-3xl font-black text-white font-mono mb-6">A Medida</div>
+            <ul class="space-y-3 text-xs text-slate-300">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-purple-400"></i> Multi-agentes especializados</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-purple-400"></i> Integración ERP/CRM existente</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-purple-400"></i> Pasarelas de pago Wompi activas</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/570000000000?text=Hola%20Grupo%20Monoga,%20quiero%20cotizar%20un%20ecosistema%20a%20medida." target="_blank" class="tactile-btn w-full py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs text-center mt-8 block">
+            Consultar con Ingeniero
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/10 bg-black/80 py-12 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-white font-black text-xs">
+          <i data-lucide="bot" class="w-4 h-4 text-emerald-400"></i>
+        </div>
+        <div>
+          <div class="font-bold text-white">GRUPO MONOGA</div>
+          <div class="text-[11px] text-slate-500 font-mono">Autonomous AI Agents &bull; 2026</div>
+        </div>
+      </div>
+      <div class="flex gap-6 font-semibold text-slate-400">
+        <a href="soluciones.html" class="hover:text-white">Soluciones</a>
+        <a href="agentes-ia.html" class="hover:text-white">Agentes IA</a>
+        <a href="casos-de-exito.html" class="hover:text-white">Casos</a>
+        <a href="contacto.html" class="hover:text-white">Contacto</a>
+      </div>
+      <div>&copy; 2026 Grupo Monoga. Todos los derechos reservados.</div>
+    </div>
+  </footer>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>
